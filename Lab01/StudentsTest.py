@@ -19,7 +19,8 @@ class Test(unittest.TestCase):
 
     # test case function to check the Students.get_name function
     def test_1_get_name(self):
-        print("\n\nStart get_name test\n\n","user_id length = ",len(self.user_id),"user_name length = ",len(self.user_name),"\n")
+        print("\n\nStart get_name test\n\n")
+        print("user_id length = ",len(self.user_id),"\nuser_name length = ",len(self.user_name),"\n")
         mex = 0
         while mex in self.user_id:
             mex += 1
