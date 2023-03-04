@@ -13,10 +13,7 @@ class ApplicationTest(unittest.TestCase):
         pass
     
     def fake_mail(self,people):
-        ret = []
-        for i in range(len(people)):
-            ret.append("Congrats," + people[i] + "!")
-        return ret
+        return "Congrats, " + people + "!"
 
     @patch("app.MailSystem.send")
     @patch("app.MailSystem.write")
@@ -28,7 +25,7 @@ class ApplicationTest(unittest.TestCase):
         self.assertEqual(one,"Liam")
         print(one,"selected")
         # spy
-        Mail_write.side_effect = self.fake_mail([" William", " Oliver", " Henry", " Liam"])
+        Mail_write.side_effect = self.fake_mail
         self.mock.notify_selected()
         for i in self.mock.selected:
             print("Congrats, "+i+"!")
