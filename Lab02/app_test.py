@@ -12,6 +12,7 @@ class ApplicationTest(unittest.TestCase):
         self.mock.selected = ["William", "Oliver", "Henry"]
         pass
     
+    
     def fake_mail(self,people):
         return "Congrats, " + people + "!"
 
