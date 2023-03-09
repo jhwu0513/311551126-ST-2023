@@ -35,7 +35,7 @@ class ApplicationTest(unittest.TestCase):
         for i in param_list:
             n = self.calc.exp(i)
             self.assertEqual(n, math.exp(i))
-        self.assertRaises(TypeError, self.calc.exp, "1")
+        self.assertRaises(OverflowError, self.calc.exp, 1000000)
         pass
 
 
