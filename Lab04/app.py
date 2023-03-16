@@ -32,7 +32,8 @@ driver.get("https://www.google.com")
 google = driver.find_element(By.NAME, 'q')
 google.send_keys("311551126")
 google.submit()
-google = driver.find_elements(By.TAG_NAME, 'h3')[2]
+google = driver.find_elements(By.CLASS_NAME, 'DKV0Md')[1]
 print(google.text)
+driver.close()
 
 
