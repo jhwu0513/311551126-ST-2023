@@ -32,10 +32,8 @@ driver.get("https://www.google.com")
 google = driver.find_element(By.NAME, 'q')
 google.send_keys("311551126")
 google.submit()
-google = driver.find_elements(By.CLASS_NAME, 'LC20lb')
-for  i in range(len(google)):
-    print(google[i].text)
-print(google[1].text)
+google = driver.find_elements(By.CLASS_NAME, 'LC20lb')[1]
+print(google.text)
 driver.close()
 
 
