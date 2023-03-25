@@ -10,3 +10,5 @@
 ![Lab03 workflow](https://github.com/jhwu0513/311551126-ST-2023/actions/workflows/Lab03-CI.yml/badge.svg)
 
 ![Lab04 workflow](https://github.com/jhwu0513/311551126-ST-2023/actions/workflows/Lab04-CI.yml/badge.svg)
+
+![Lab05 workflow](https://github.com/jhwu0513/311551126-ST-2023/actions/workflows/Lab05-CI.yml/badge.svg)
