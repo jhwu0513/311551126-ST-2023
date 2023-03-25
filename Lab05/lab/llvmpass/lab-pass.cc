@@ -85,7 +85,7 @@ bool LabPass::runOnModule(Module &M) {
     if (!F.empty()) { // 檢查函數是否為空
       BasicBlock &Bstart = F.front(); 
       BasicBlock &Bend = F.back(); 
-
+      
       if (!Bstart.empty()) { 
         Instruction &Istart = Bstart.front();
         IRBuilder<> IR(&Istart);
@@ -101,16 +101,17 @@ bool LabPass::runOnModule(Module &M) {
         IRBuilder<> BuilderEnd(Bepi);
 
         Value *val = BuilderEnd.CreateLoad(Type::getInt32Ty(ctx), gvar);
-        // BuilderEnd.CreateCall(printfCallee, { BuilderEnd.CreateGlobalStringPtr("%d\n"), val });
+        // BuilderEnd.CreateCall(printfCallee, { BuilderEnd.CreateGlobalStringPtr("%d "), val });
+        if(F.getName()!="main"){
+          Value *Space = ConstantInt::get(Type::getInt8Ty(ctx), ' ');
+          std::vector<Value *> Args;
+          Args.push_back(BuilderEnd.CreateGlobalStringPtr("%*c"));  // 設定格式字串
+          Args.push_back(val);  // 設定寬度
+          Args.push_back(BuilderEnd.CreateBitCast(Space, Type::getInt32Ty(ctx)));
+          BuilderEnd.CreateCall(printfCallee, Args);
+        }
         
-        Value *Space = ConstantInt::get(Type::getInt8Ty(ctx), ' ');
-        std::vector<Value *> Args;
-        Args.push_back(BuilderEnd.CreateGlobalStringPtr("%*c"));  // 設定格式字串
-        Args.push_back(val);  // 設定寬度
-        Args.push_back(BuilderEnd.CreateBitCast(Space, Type::getInt32Ty(ctx)));
-        BuilderEnd.CreateCall(printfCallee, Args);
-
-        BuilderEnd.CreateCall(printfCallee, { getI8StrVal(M, (F.getName() + " : %p\n").str().c_str(), "Msg"), BuilderEnd.CreatePtrToInt(&F, Type::getInt64Ty(ctx)) });
+        BuilderEnd.CreateCall(printfCallee, { getI8StrVal(M, (F.getName() + ": %p\n").str().c_str(), "Msg"), BuilderEnd.CreatePtrToInt(&F, Type::getInt64Ty(ctx)) });
         Instruction &Istart = Bend.back();
         IRBuilder<> IR(&Istart);
         LoadInst *Load = IR.CreateLoad(Type::getInt32Ty(ctx),gvar);
