@@ -12,6 +12,7 @@ class Test(unittest.TestCase):
         print("Start set_name test\n")
         for name in self.user_name:
             id = self.students.set_name(name)
+            self.assertNotIn(id,self.user_id)
             self.user_id.append(id)
             self.assertEqual(self.students.name[id],self.user_name[id])
             print(id,self.students.name[id])
@@ -26,7 +27,7 @@ class Test(unittest.TestCase):
             mex += 1
         for i in range(len(self.user_name)+1):
             if i < len(self.user_name):
-                self.assertEqual(self.students.get_name(self.user_id[i]),self.user_name[self.user_id[i]])
+                self.assertEqual(self.students.get_name(self.user_id[i]),self.user_name[i])
                 print("id",self.user_id[i],":",self.user_name[self.user_id[i]])
             else:
                 self.assertEqual(self.students.get_name(mex),'There is no such user')
