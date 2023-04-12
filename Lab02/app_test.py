@@ -6,10 +6,10 @@ from app import Application
 # https://medium.com/@henry-chou/%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E4%B9%8B-mock-stub-spy-fake-%E5%82%BB%E5%82%BB%E6%90%9E%E4%B8%8D%E6%B8%85%E6%A5%9A-ba3dc4e86d86
 
 class ApplicationTest(unittest.TestCase):
+    # 處理相依性的技巧就只分為stub跟mock兩類
 
     def setUp(self):
         # stub 用來取代相依的物件，但不會驗證輸出是否正確
-        # 處理相依性的技巧就只分為stub跟mock兩類
         Application.__init__ = Mock(return_value=None)
         self.mock = Application()
         self.mock.people = ["William", "Oliver", "Henry", "Liam"]
