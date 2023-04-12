@@ -2,6 +2,9 @@ import unittest
 from unittest.mock import Mock,patch
 from app import Application
 
+# reference : 
+# https://medium.com/@henry-chou/%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E4%B9%8B-mock-stub-spy-fake-%E5%82%BB%E5%82%BB%E6%90%9E%E4%B8%8D%E6%B8%85%E6%A5%9A-ba3dc4e86d86
+
 class ApplicationTest(unittest.TestCase):
 
     def setUp(self):
@@ -42,7 +45,5 @@ class ApplicationTest(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-# reference : 
-# https://medium.com/@henry-chou/%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E4%B9%8B-mock-stub-spy-fake-%E5%82%BB%E5%82%BB%E6%90%9E%E4%B8%8D%E6%B8%85%E6%A5%9A-ba3dc4e86d86
 
     
