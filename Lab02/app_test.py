@@ -9,6 +9,7 @@ class ApplicationTest(unittest.TestCase):
 
     def setUp(self):
         # stub 用來取代相依的物件，但不會驗證輸出是否正確
+        # 處理相依性的技巧就只分為stub跟mock兩類
         Application.__init__ = Mock(return_value=None)
         self.mock = Application()
         self.mock.people = ["William", "Oliver", "Henry", "Liam"]
