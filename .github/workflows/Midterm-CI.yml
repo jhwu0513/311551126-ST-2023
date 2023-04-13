@@ -20,12 +20,12 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install coverage
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Build LLVM Pass, build target, run target
+      - name: Run Q1
         run: |
-          cd Lab05/lab
-          make
-          ./newprog
-      - name: Verify result
+          cd modterm
+          python3 course_scheduling_system_test.py  -v 1>log.txt
+          cat log.txt
+      - name: Run Q2
         run: |
-          cd Lab05/lab
-          python3 ./verify.py
+          cd modterm
+          python3 app.py
