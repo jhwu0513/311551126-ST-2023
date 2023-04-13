@@ -25,12 +25,12 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Q1
       run: |
-        cd Midterm
+        cd midterm
         python3 course_scheduling_system_test.py  -v 1>log.txt
         cat log.txt
         coverage run course_scheduling_system_test.py
         coverage report
     - name: Q2
       run: |
-        cd Midterm
+        cd midterm
         python3 app.py
