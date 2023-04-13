@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
 import time
 
 options = Options()
@@ -38,3 +39,19 @@ print(href.get_attribute("innerHTML"))
 # google = driver.find_element(By.NAME, 'q')
 # google.send_keys("class")
 # google.submit()
+wait = WebDriverWait(driver, 20)
+
+search_box = wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[2]/ul/li[11]/div/form/input[1]')))
+search_box.send_keys("class")
+search_box.send_keys(Keys.ENTER)
+
+result = wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[3]/div[1]/div/div/div[1]/ul/li[1]/a')))
+print(result.text)
+result = wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[3]/div[1]/div/div/div[1]/ul/li[2]/a')))
+print(result.text)
+result = wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[3]/div[1]/div/div/div[1]/ul/li[3]/a')))
+print(result.text)
+result = wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[3]/div[1]/div/div/div[1]/ul/li[4]/a')))
+print(result.text)
+result = wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[3]/div[1]/div/div/div[1]/ul/li[5]/a')))
+print(result.text)
