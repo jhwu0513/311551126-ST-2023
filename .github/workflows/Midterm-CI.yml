@@ -1,0 +1,31 @@
+name: Midterm CI
+run-name: Midterm CI is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install coverage
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Build LLVM Pass, build target, run target
+        run: |
+          cd Lab05/lab
+          make
+          ./newprog
+      - name: Verify result
+        run: |
+          cd Lab05/lab
+          python3 ./verify.py
