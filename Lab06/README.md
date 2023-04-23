@@ -496,6 +496,16 @@ $ export ASAN_OPTIONS=detect_stack_use_after_return=1
 
 Valgrind : 可以
 
+### Lab06
+
+|        | Valgrind | ASAN |
+|  ----  | ----  | ----  |
+| Heap out-of-bounds  | 可以 | 可以 |
+| Stack out-of-bounds  | 可以 | 可以 |
+| Global out-of-bounds  | 可以 | 不行 |
+| Use-after-free  | 可以 | 可以 |
+| Use-after-return  | 可以 | 可以 |
+
 ### Bypass ASan
 
 Code
