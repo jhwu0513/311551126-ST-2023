@@ -96,8 +96,11 @@ a
 ```
 
 Compiler : GCC 
+
 Version : gcc version 7.5.0
+
 ASan : 可以
+
 Valgrind : 可以
 
 ### Stack out-of-bounds read/write
@@ -192,8 +195,11 @@ Valgrind report
 ```
 
 Compiler : GCC 
+
 Version : gcc version 7.5.0
+
 ASan : 可以
+
 Valgrind : 可以
 
 ### Global out-of-bounds read/write
@@ -274,8 +280,11 @@ Valgrind report
 ```
 
 Compiler : GCC 
+
 Version : gcc version 7.5.0
+
 ASan : 可以
+
 Valgrind : 不行
 
 
@@ -378,8 +387,11 @@ Valgrind report
 ```
 
 Compiler : GCC 
+
 Version : gcc version 7.5.0
+
 ASan : 可以
+
 Valgrind : 可以
 
 ### Use-after-return
@@ -475,9 +487,13 @@ Valgrind report
 ```
 
 Compiler : GCC 
+
 Version : gcc version 7.5.0
+
 ASan : 可以，但ASan預設是沒有開啟 stack-use-after-return 的偵測，需要在全域變數內設定 ASAN_OPTIONS
+
 $ export ASAN_OPTIONS=detect_stack_use_after_return=1
+
 Valgrind : 可以
 
 ### Bypass ASan
@@ -503,5 +519,7 @@ $ ./bypassAsan
 1
 ```
 Compiler : GCC 
+
 Version : gcc version 7.5.0
+
 ASan : 不行，由於redzone檢查機制只在變數的前後加redzone，而redzone為32 bytes，所以只要跳過a:32 bytes + redzone:32bytes = 64 bytes = 16 int就可以存取b[0]
