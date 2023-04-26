@@ -200,7 +200,7 @@ Version : gcc version 7.5.0
 
 ASan : 可以
 
-Valgrind : 可以
+Valgrind : 不行
 
 ### Global out-of-bounds read/write
 Code 
@@ -501,8 +501,8 @@ Valgrind : 可以
 |        | Valgrind | ASAN |
 |  ----  | ----  | ----  |
 | Heap out-of-bounds  | 可以 | 可以 |
-| Stack out-of-bounds  | 可以 | 可以 |
-| Global out-of-bounds  | 可以 | 不行 |
+| Stack out-of-bounds  | 不行 | 可以 |
+| Global out-of-bounds  | 不行 | 可以 |
 | Use-after-free  | 可以 | 可以 |
 | Use-after-return  | 可以 | 可以 |
 
