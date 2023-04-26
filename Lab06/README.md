@@ -111,40 +111,40 @@ Code
 
 int main(){
     int arr[5] = {1, 2, 3, 4, 5};
-    arr[6] = 10;
-    printf("%d\n",arr[6]);
+    arr[5] = 6;
+    printf("%d\n",arr[5]);
     return 0;
 }
 ```
 ASan report
 ```
 =================================================================
-==1996==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fff8adb71e8 at pc 0x563035800c67 bp 0x7fff8adb71a0 sp 0x7fff8adb7190
-WRITE of size 4 at 0x7fff8adb71e8 thread T0
-    #0 0x563035800c66 in main /home/jhwu/Lab06/stack.c:6
-    #1 0x7fc017cd4c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
-    #2 0x563035800999 in _start (/home/jhwu/Lab06/stack+0x999)
+==9068==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fff90ea0d54 at pc 0x55cebae00c6d bp 0x7fff90ea0d10 sp 0x7fff90ea0d00
+WRITE of size 4 at 0x7fff90ea0d54 thread T0
+    #0 0x55cebae00c6c in main /home/jhwu/Lab06/stack.c:6
+    #1 0x7f60f34a7c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #2 0x55cebae00999 in _start (/home/jhwu/Lab06/stack+0x999)
 
-Address 0x7fff8adb71e8 is located in stack of thread T0 at offset 56 in frame
-    #0 0x563035800a89 in main /home/jhwu/Lab06/stack.c:4
+Address 0x7fff90ea0d54 is located in stack of thread T0 at offset 52 in frame
+    #0 0x55cebae00a89 in main /home/jhwu/Lab06/stack.c:4
 
   This frame has 1 object(s):
-    [32, 52) 'arr' <== Memory access at offset 56 overflows this variable
+    [32, 52) 'arr' <== Memory access at offset 52 overflows this variable
 HINT: this may be a false positive if your program uses some custom stack unwind mechanism or swapcontext
       (longjmp and C++ exceptions *are* supported)
 SUMMARY: AddressSanitizer: stack-buffer-overflow /home/jhwu/Lab06/stack.c:6 in main
 Shadow bytes around the buggy address:
-  0x1000715aede0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aedf0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aee00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aee10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aee20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x1000715aee30: 00 00 00 00 00 00 f1 f1 f1 f1 00 00 04[f2]00 00
-  0x1000715aee40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aee50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aee60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aee70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x1000715aee80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc150: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc160: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc170: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc190: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x1000721cc1a0: 00 00 00 00 f1 f1 f1 f1 00 00[04]f2 00 00 00 00
+  0x1000721cc1b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc1c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc1d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc1e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1000721cc1f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 Shadow byte legend (one shadow byte represents 8 application bytes):
   Addressable:           00
   Partially addressable: 01 02 03 04 05 06 07 
@@ -164,34 +164,25 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   ASan internal:           fe
   Left alloca redzone:     ca
   Right alloca redzone:    cb
-==1996==ABORTING
+==9068==ABORTING
 ```
 Valgrind report
 ```
-==1936== Memcheck, a memory error detector
-==1936== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1936== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==1936== Command: ./stack
-==1936== 
-10
-*** stack smashing detected ***: <unknown> terminated
-==1936== 
-==1936== Process terminating with default action of signal 6 (SIGABRT)
-==1936==    at 0x4E7CE87: raise (raise.c:51)
-==1936==    by 0x4E7E7F0: abort (abort.c:79)
-==1936==    by 0x4EC7836: __libc_message (libc_fatal.c:181)
-==1936==    by 0x4F72B30: __fortify_fail_abort (fortify_fail.c:33)
-==1936==    by 0x4F72AF1: __stack_chk_fail (stack_chk_fail.c:29)
-==1936==    by 0x108719: main (in /home/jhwu/Lab06/stack)
-==1936== 
-==1936== HEAP SUMMARY:
-==1936==     in use at exit: 0 bytes in 0 blocks
-==1936==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
-==1936== 
-==1936== All heap blocks were freed -- no leaks are possible
-==1936== 
-==1936== For counts of detected and suppressed errors, rerun with: -v
-==1936== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==8889== Memcheck, a memory error detector
+==8889== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==8889== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==8889== Command: ./stack
+==8889== 
+6
+==8889== 
+==8889== HEAP SUMMARY:
+==8889==     in use at exit: 0 bytes in 0 blocks
+==8889==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==8889== 
+==8889== All heap blocks were freed -- no leaks are possible
+==8889== 
+==8889== For counts of detected and suppressed errors, rerun with: -v
+==8889== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 ```
 
 Compiler : GCC 
