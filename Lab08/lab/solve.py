@@ -13,14 +13,6 @@ def should_abort(state):
     stdout_output = state.posix.dumps(sys.stdout.fileno())
     return 'WA!\n'.encode() in stdout_output
 
-def handle_fgets_real_input(raw_input):
-    idx = 0
-    for c in raw_input:
-        if c == ord('\n') or c == ord('\0'):
-            break
-        idx += 1
-    return raw_input[:idx]
-
 class my_scanf(angr.SimProcedure):
     def run(self, format, s):
         # we're reading from stdin so the region is the file's content
@@ -44,7 +36,6 @@ if simgr.found:
     ANSWER = []
     for i in range(15):
         data = simgr.found[0].posix.dumps(sys.stdin.fileno())[0x04*i:0x04*(i+1)]
-        data = handle_fgets_real_input(data)
         ANSWER.append(data)
         print(int.from_bytes(data, byteorder='little', signed=True))
     with open('answer_input', 'w') as f:
