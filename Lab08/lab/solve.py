@@ -5,6 +5,14 @@ main_addr = 0x4011a9
 find_addr = 0x401371
 avoid_addr = 0x40134d
 
+def is_successful(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return 'AC!\n'.encode() in stdout_output
+
+def should_abort(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return 'WA!\n'.encode() in stdout_output
+
 def handle_fgets_real_input(raw_input):
     idx = 0
     for c in raw_input:
@@ -29,7 +37,7 @@ state = proj.factory.blank_state(addr=main_addr)
 
 
 simgr = proj.factory.simulation_manager(state)
-simgr.explore(find=find_addr, avoid=avoid_addr)
+simgr.explore(find=is_successful, avoid=should_abort)
 
 if simgr.found:
     print(simgr.found[0].posix.dumps(sys.stdin.fileno()))
